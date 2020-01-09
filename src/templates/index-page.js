@@ -4,8 +4,6 @@ import { Link, graphql } from 'gatsby'
 import bytes from 'bytes'
 
 import Layout from '../components/Layout'
-import Features from '../components/Features'
-import BlogRoll from '../components/BlogRoll'
 import MaterialTable from "material-table";
 
 
@@ -65,6 +63,7 @@ export default ({ data }) => (
             {
               field: 'name',
               title: 'Name',
+              defaultSort: "asc"  ,
               render: rowData => <GifRow gif={rowData} />
             },
             { title: "Modified", field: "modifiedTime", type: "date" },
@@ -80,11 +79,14 @@ export default ({ data }) => (
           style={
             {
               boxShadow: "none",
-              borderBottom: "0px"
+              borderBottom: "0px",
+              bottom: "0",
+              position: "relative"
             }
           }
           options={{
-            sorting: true
+            sorting: true,
+            pageSize: 100
           }}
         />
     {/* {data.allFile.nodes.map(({ node }) => (
