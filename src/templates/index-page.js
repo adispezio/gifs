@@ -83,6 +83,9 @@ export default ({ data }) => (
               borderBottom: "0px"
             }
           }
+          options={{
+            sorting: true
+          }}
         />
     {/* {data.allFile.nodes.map(({ node }) => (
         {"foo"}
