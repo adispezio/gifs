@@ -34,7 +34,7 @@ class GifRow extends React.Component {
       <div style={{position: "relative"}}>
         <a onMouseEnter={this.handleMouseHover}
           onMouseLeave={this.handleMouseHover}
-          href={gif.publicURL}
+          href={"/gifs/" + gif.name + gif.ext}
           >{gif.name}{gif.ext}
         </a>
         {
