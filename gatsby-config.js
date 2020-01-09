@@ -19,7 +19,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `gifs`,
-        path: `${__dirname}/static`,
+        path: `${__dirname}/static/gifs`,
         ignore: [`**/\.*`], // ignore files starting with a dot
       },
     },
