@@ -96,7 +96,7 @@ export default ({ data }) => (
           }
           options={{
             sorting: true,
-            pageSize: 250
+            pageSize: 150
           }}
         />
     {/* {data.allFile.nodes.map(({ node }) => (
