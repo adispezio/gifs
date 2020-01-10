@@ -34,7 +34,13 @@ module.exports = {
       options: {
         name: `gifs`,
         path: `${__dirname}/static/`,
-        ignore: [`**/\.*`, `**/config*.yml`], // ignore files starting with a dot
+        ignore: [
+          `**/\.*`, 
+          `**/config*.yml`,
+          `**/android-chrome*`,
+          `**/apple-touch*`,
+          `**/favicon*`,
+        ], // ignore files starting with a dot
       },
     },
     'gatsby-plugin-sharp',
