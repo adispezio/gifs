@@ -1,0 +1,28 @@
+body {
+}
+
+.gif-link {
+  // position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    left: 0px;
+    margin-top: -16px;
+    height: 50px;
+  }
+}
+
+.MuiTableRow-root {
+  &:hover {
+    transition: none;
+    background:#E9F6FB;
+  }
+}
+
+.MuiTableCell-root {
+  padding: 6px 16px !important;
+}

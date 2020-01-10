@@ -16,14 +16,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `gifs`,
-        path: `${__dirname}/static/gifs`,
-        ignore: [`**/\.*`], // ignore files starting with a dot
-      },
-    },
-    {
       resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/src/pages`,
@@ -35,6 +27,14 @@ module.exports = {
       options: {
         path: `${__dirname}/src/img`,
         name: 'images',
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `gifs`,
+        path: `${__dirname}/static/`,
+        ignore: [`**/\.*`, `**/config*.yml`], // ignore files starting with a dot
       },
     },
     'gatsby-plugin-sharp',

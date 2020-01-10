@@ -5,6 +5,7 @@ import bytes from 'bytes'
 
 import Layout from '../components/Layout'
 import MaterialTable from "material-table";
+import MouseTooltip from 'react-sticky-mouse-tooltip';
 
 
 class GifRow extends React.Component {
@@ -13,6 +14,7 @@ class GifRow extends React.Component {
     this.handleMouseHover = this.handleMouseHover.bind(this);
     this.state = {
       isHovering: false,
+      isMouseTooltipVisible: false,
     };
   }
 
@@ -31,26 +33,34 @@ class GifRow extends React.Component {
 
 
     return (
-      <div style={{position: "relative"}}>
-        <a onMouseEnter={this.handleMouseHover}
+      <div>
+      <a className="gif-link" onMouseEnter={this.handleMouseHover}
           onMouseLeave={this.handleMouseHover}
-          href={"/gifs/" + gif.name + gif.ext}
+          href={"/" + gif.name + gif.ext}
           >{gif.name}{gif.ext}
-        </a>
+      </a>
+      <div style={{position: "relative"}}>
         {
           this.state.isHovering &&
+          <MouseTooltip
+          visible={true}
+          offsetX={15}
+          offsetY={10}
+        >        
           <img 
             src={gif.publicURL} 
             style={
               {
                 position: "absolute",
-                left: "150px",
+                left: "20px",
                 top: "20px",
                 maxWidth: "300px",
                 maxHeight: "none"
               }
             }/>
+          </MouseTooltip>
         }
+      </div>
       </div>
     )
   }
