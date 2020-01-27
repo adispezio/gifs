@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 import bytes from 'bytes'
@@ -8,73 +8,16 @@ import MaterialTable from "material-table";
 import MouseTooltip from 'react-sticky-mouse-tooltip';
 
 
-class GifRow extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleMouseHover = this.handleMouseHover.bind(this);
-    this.state = {
-      isHovering: false,
-      isMouseTooltipVisible: false,
-    };
-  }
-
-  handleMouseHover() {
-    this.setState(this.toggleHoverState);
-  }
-
-  toggleHoverState(state) {
-    return {
-      isHovering: !state.isHovering,
-    };
-  }
-
-  render() {
-    let gif = this.props.gif
-
-
-    return (
-      <div>
-      <a className="gif-link" onMouseEnter={this.handleMouseHover}
-          onMouseLeave={this.handleMouseHover}
-          href={"/" + gif.name + gif.ext}
-          >{gif.name}{gif.ext}
-      </a>
-      <div style={{position: "relative"}}>
-        {
-          this.state.isHovering &&
-          <MouseTooltip
-          visible={true}
-          offsetX={15}
-          offsetY={10}
-        >        
-          <img 
-            src={gif.publicURL} 
-            style={
-              {
-                position: "absolute",
-                left: "20px",
-                top: "20px",
-                maxWidth: "300px",
-                maxHeight: "none"
-              }
-            }/>
-          </MouseTooltip>
-        }
-      </div>
-      </div>
-    )
-  }
-}
-
-export default ({ data }) => (
-  <Layout>
+function HoverWrapper({ data }) {
+  const [gifURL, setGifURL] = useState('');
+  return <>
     <MaterialTable
           columns={[
             {
               field: 'name',
               title: 'Name',
               defaultSort: "asc"  ,
-              render: rowData => <GifRow gif={rowData} />
+              render: rowData => <GifRow gif={rowData} updateGifURL={(gifURL) => setGifURL(gifURL)}/>
             },
             { title: "Modified", field: "modifiedTime", type: "date" },
             {
@@ -99,6 +42,61 @@ export default ({ data }) => (
             pageSize: 150
           }}
         />
+      <MouseTooltip
+      visible={true}
+      offsetX={15}
+      offsetY={10}
+    >        
+      <img 
+        src={gifURL}
+        style={
+          {
+            position: "absolute",
+            left: "20px",
+            top: "20px",
+            maxWidth: "300px",
+            maxHeight: "none",
+            zIndex: "200"
+          }
+        }
+          
+        />
+      </MouseTooltip>
+  </>;
+}
+
+
+class GifRow extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isHovering: false,
+      isMouseTooltipVisible: false
+    };
+  }
+
+  handleMouseEnter(gif) {
+    let gifURL = "gifs/" + gif.name + gif.ext;
+    this.props.updateGifURL(gifURL);
+  }
+
+  render() {
+    let gif = this.props.gif
+
+    return (
+      <div>
+      <a className="gif-link" onMouseEnter={() => this.handleMouseEnter(gif)}
+          href={"gifs/" + gif.name + gif.ext}
+          >{gif.name}{gif.ext}
+      </a>
+      </div>
+    )
+  }
+}
+
+export default ({ data }) => (
+  <Layout>
+  <HoverWrapper data={data} />
     {/* {data.allFile.nodes.map(({ node }) => (
         {"foo"}
       ))} */}
