@@ -33,7 +33,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `gifs`,
-        path: `${__dirname}/static/gifs`,
+        path: `${__dirname}/static/`,
         ignore: [
           `**/\.*`, 
           `**/config*.yml`,

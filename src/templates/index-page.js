@@ -76,7 +76,7 @@ class GifRow extends React.Component {
   }
 
   handleMouseEnter(gif) {
-    let gifURL = "gifs/" + gif.name + gif.ext;
+    let gifURL = "" + gif.name + gif.ext;
     this.props.updateGifURL(gifURL);
   }
 
@@ -86,7 +86,7 @@ class GifRow extends React.Component {
     return (
       <div>
       <a className="gif-link" onMouseEnter={() => this.handleMouseEnter(gif)}
-          href={"gifs/" + gif.name + gif.ext}
+          href={"" + gif.name + gif.ext}
           >{gif.name}{gif.ext}
       </a>
       </div>
