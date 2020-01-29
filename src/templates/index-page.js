@@ -39,7 +39,8 @@ function HoverWrapper({ data }) {
           }
           options={{
             sorting: true,
-            pageSize: 150
+            pageSize: 150,
+            searchFieldAlignment: "left",
           }}
         />
       <MouseTooltip
